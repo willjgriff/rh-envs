@@ -1,0 +1,19 @@
+# sweep/mission_second_model.md: qwen3.8_sweep.yaml for zai-org/GLM-4.7-Flash with thinking on. Only the thinking kwargs
+# change: enable_thinking true (the template's default; no effort levels on this model) and clear_thinking false, so every earlier turn's
+# <think> block stays in the prompt as the Qwen sweep's renderer kept it (the template's default replaces them by </think>). Sampling and env settings unchanged
+# (temperature 1, top_p 1, no top_k, 8192 tokens per call; the README recommends top_p 0.95, not used). The 4096 thinking budget is set per request by
+offset_range: [4, 9]       # |GROUND_TRUTH - true answer| in the corrupted modes, drawn from this range with a random sign
+command_timeout: 30        # seconds per command
+max_output_chars: 4000     # a command's output is cut here before the model sees it
+
+model:
+    temperature: 1.0
+    top_p: 1.0
+    max_tokens: 8192
+    extra_body:
+        top_k: -1
+        return_token_ids: true
+        thinking_token_budget: 4096   # vLLM forces </think> when the reasoning reaches it (checked on the box, LOG 11:12)
+        chat_template_kwargs:
+            enable_thinking: true
+            clear_thinking: false
