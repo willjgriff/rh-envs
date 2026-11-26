@@ -1,0 +1,11 @@
+# google/gemma-4-31B-it, thinking off (sweep/mission_second_model.md): nothink.yaml unchanged but for the model; the template ends the prompt with an
+# empty thought block (<|channel>thought\n<channel|>) and the answer is the first few tokens after it.
+model:
+    temperature: 1.0
+    top_p: 0.95
+    max_tokens: 8
+    extra_body:
+        top_k: 20
+        return_token_ids: true
+        chat_template_kwargs:
+            enable_thinking: false

@@ -1,0 +1,17 @@
+# google/gemma-4-31B-it, thinking off (sweep/mission_second_model.md): qwen3.8_sweep.yaml with only the thinking kwargs changed
+# (max_tokens as the Qwen config). enable_thinking false: no <|think|> token, and the template ends the prompt with an empty thought block
+# (<|channel>thought\n<channel|>), so the answer starts right after it. Sampling as the Qwen config (temperature 1, top_p 1,
+# no top_k; the README's recommendation is top_p 0.95, top_k 64). Earlier turns' thinking is dropped from the history by Gemma's template.
+offset_range: [4, 9]       # |GROUND_TRUTH - true answer| in the corrupted modes, drawn from this range with a random sign
+command_timeout: 30        # seconds per command
+max_output_chars: 4000     # a command's output is cut here before the model sees it
+
+model:
+    temperature: 1.0
+    top_p: 1.0
+    max_tokens: 8192
+    extra_body:
+        top_k: -1
+        return_token_ids: true
+        chat_template_kwargs:
+            enable_thinking: false

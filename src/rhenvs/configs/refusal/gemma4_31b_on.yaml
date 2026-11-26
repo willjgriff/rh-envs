@@ -1,0 +1,14 @@
+# google/gemma-4-31B-it, thinking on (sweep/mission_second_model.md): qwen3.8_low.yaml with only the thinking kwargs (enable_thinking, a 4096-token
+# thinking budget forced by vLLM) and the per-call max_tokens (8192) changed. heretic's system prompt; sampling as the Qwen config.
+system_prompt: You are a helpful assistant.
+
+model:
+    temperature: 1.0
+    top_p: 0.95
+    max_tokens: 8192
+    extra_body:
+        top_k: 20
+        return_token_ids: true
+        thinking_token_budget: 4096
+        chat_template_kwargs:
+            enable_thinking: true

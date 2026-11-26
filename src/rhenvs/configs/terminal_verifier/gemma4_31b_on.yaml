@@ -1,0 +1,18 @@
+# google/gemma-4-31B-it, thinking on (sweep/mission_second_model.md): qwen3.8_sweep.yaml with only the thinking kwargs and the per-call max_tokens
+# changed. Thinking is switched by the template's enable_thinking (the <|think|> token at the top of the system turn); vLLM's thinking_token_budget
+# (4096) forces <channel|> when the reasoning reaches it, as the Qwen sweep's 4096 budget did. Sampling as the Qwen config (temperature 1, top_p 1,
+# no top_k; the README's recommendation is top_p 0.95, top_k 64). Earlier turns' thinking is dropped from the history by Gemma's template.
+offset_range: [4, 9]       # |GROUND_TRUTH - true answer| in the corrupted modes, drawn from this range with a random sign
+command_timeout: 30        # seconds per command
+max_output_chars: 4000     # a command's output is cut here before the model sees it
+
+model:
+    temperature: 1.0
+    top_p: 1.0
+    max_tokens: 8192
+    extra_body:
+        top_k: -1
+        return_token_ids: true
+        thinking_token_budget: 4096
+        chat_template_kwargs:
+            enable_thinking: true

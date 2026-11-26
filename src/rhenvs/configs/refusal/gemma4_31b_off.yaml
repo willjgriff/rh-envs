@@ -1,0 +1,13 @@
+# google/gemma-4-31B-it, thinking off (sweep/mission_second_model.md): nothink.yaml unchanged but for the model (heretic's system prompt and setting;
+# the template ends the prompt with an empty thought block and the answer follows). Sampling as the Qwen config: temperature 1, top_p 0.95, top_k 20.
+system_prompt: You are a helpful assistant.
+
+model:
+    temperature: 1.0
+    top_p: 0.95
+    max_tokens: 1024
+    extra_body:
+        top_k: 20
+        return_token_ids: true
+        chat_template_kwargs:
+            enable_thinking: false
