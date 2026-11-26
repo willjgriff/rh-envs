@@ -1,6 +1,6 @@
 # sweep/mission_second_model.md: qwen3.8_low.yaml for nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16 with thinking on (enable_thinking true, the
 # template's default; this model has no effort levels). Sampling as the Qwen config (temperature 1, top_p 0.95, top_k 20); max_tokens 8192 per call
-# (the mission's reasoning-on cap). The 4096 thinking budget is set per request by the runner when the server supports it.
+# The 4096 thinking budget is vLLM's thinking_token_budget sampling field, sent in extra_body (the box checked it forces </think> at the budget).
 model:
     temperature: 1.0
     top_p: 0.95
@@ -8,5 +8,6 @@ model:
     extra_body:
         top_k: 20
         return_token_ids: true
+        thinking_token_budget: 4096   # vLLM forces </think> when the reasoning reaches it (checked on the box, LOG 11:12)
         chat_template_kwargs:
             enable_thinking: true
