@@ -1,0 +1,13 @@
+# sweep/mission_second_model.md: refusal/nothink.yaml for nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16: thinking off (enable_thinking false), heretic's
+# system prompt, sampling and max_tokens (1024) as the Qwen config.
+system_prompt: You are a helpful assistant.
+
+model:
+    temperature: 1.0
+    top_p: 0.95
+    max_tokens: 1024
+    extra_body:
+        top_k: 20
+        return_token_ids: true
+        chat_template_kwargs:
+            enable_thinking: false

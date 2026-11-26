@@ -1,0 +1,11 @@
+# sweep/mission_second_model.md: nothink.yaml for nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16: thinking off (enable_thinking false; the template
+# renders <think></think> and the answer is the first few tokens after it). Sampling and max_tokens as the Qwen config.
+model:
+    temperature: 1.0
+    top_p: 0.95
+    max_tokens: 8
+    extra_body:
+        top_k: 20
+        return_token_ids: true
+        chat_template_kwargs:
+            enable_thinking: false
