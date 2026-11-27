@@ -8,7 +8,7 @@ judge:                                               # one vote per variant besi
     provider: deepinfra/fp8                          # the one OpenRouter endpoint the judge is pinned to
     max_tokens: 512                                  # upstream's judge settings: 512 tokens at temperature 0, thinking off
     reasoning_effort: none
-    variants: [variant_a_decision_tree, variant_b_evidence]   # configs/toolfail/judge/<variant>.md after base_rubric.md; [] for the rule classifier's label alone
+    variants: []   # sweep/mission_gemma_envs.md: no judge on the box (no OpenRouter key), the rule classifier's label alone
 
 model:
     temperature: 1.0
